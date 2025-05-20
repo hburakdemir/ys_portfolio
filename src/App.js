@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import { Box } from '@mui/material';
+
+import Navbar from './components/navbar';
+import ScrollSpy from './components/scroll';
+
+/////////////////////
+import About from './pages/about';
+import Contact from './pages/contact';
+import Education from './pages/education';
+import Experience from './pages/experience';
+import Project from './pages/projects';
+import Services from './pages/services';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <Box 
+    
+      sx={{ 
+        bgcolor:'#FFF',
+        minHeight: '100vh',  // tüm ekran yüksekliği kadar
+      }}
+    >
+      <Navbar />
+       <ScrollSpy sectionIds={['about', 'education', 'experience', 'projects', 'skills', 'contact']} />
+
+      <Box id="about"sx={{ py: { xs: 6, md: 10 }, minHeight: '100vh' }}> <About /> </Box>
+      <Box id="education"sx={{ py: { xs: 6, md: 10 }, minHeight: '90vh' }}> <Education /> </Box>
+      <Box id="experience"sx={{ py: { xs: 6, md: 10 }, minHeight: '90vh' }}> <Experience /> </Box>
+      <Box id="projects"sx={{ py: { xs: 6, md: 10 }, minHeight: '100vh' }}> <Project /> </Box>
+      <Box id="services"sx={{ py: { xs: 6, md: 10 }, minHeight: '100vh' }}> <Services /> </Box>
+      <Box id="contact"sx={{ py: { xs: 6, md: 10 }, minHeight: '100vh' }}> <Contact /> </Box>
+       
+     
+      
+    </Box>
   );
 }
 
