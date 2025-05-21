@@ -8,8 +8,6 @@ import {
 
 } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import projectData from '../data/project';

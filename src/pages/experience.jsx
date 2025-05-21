@@ -3,8 +3,6 @@ import {
   Box,
   Typography,
   Paper,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
 import {
   Timeline,
@@ -14,13 +12,12 @@ import {
   TimelineContent,
   TimelineDot,
 } from "@mui/lab";
-import WorkIcon from "@mui/icons-material/Work";
 import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import experienceData from "../data/experience";
 
 const Experience = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+
 
   return (
     <Box
