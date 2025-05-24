@@ -25,17 +25,19 @@ const Experience = () => {
       sx={{
         py: 6,
         px: 2,
+
       }}
     >
       
       <Typography
         variant="h4"
         align="center"
-        gutterBottom
+        gutterBottom  
         sx={{
           mb: 4,
           fontWeight: 'bold',
-          background: 'linear-gradient(to bottom,rgb(140, 125, 156), #A594F9)',
+          bgcolor:'white',
+          
           WebkitBackgroundClip: 'text',      // Safari/Chrome için
           WebkitTextFillColor: 'transparent', // Safari/Chrome için
           backgroundClip: 'text',             // Diğer tarayıcılar için
@@ -115,23 +117,23 @@ const Experience = () => {
           sx={{
             p: 2,
             color: "black",
-
-            background: "linear-gradient(to bottom, #E5D9F2, #A594F9)",
+            background:'linear-gradient(100deg, #03346E,rgb(69, 131, 207))',
             borderRadius: 2,
             maxWidth: "600px",
             width: "100%",
             "&:hover": {
               transform: "scale(1.1)",
               filter:
-                "drop-shadow(0 0 6px #FBFBFB) drop-shadow(0 0 10px #C5BAFF)",
+                "drop-shadow(0 0 1px #E2E2B6) drop-shadow(0 0 5px #E2E2B6)",
             },
           }}
-        >
+        > 
           <Typography
             variant="h6"
             sx={{
               fontWeight: "bold",
               textAlign: "center",
+              color:'white',
               pb: 4,
             }}
           >
@@ -143,6 +145,7 @@ const Experience = () => {
               variant="body2"
               sx={{
                 textAlign: "center",
+                color:'white',
                 p: 1,
               }}
             >

@@ -124,15 +124,15 @@ const Education = () => {
           height: { xs: "100%", sm: "90%", md: "70%", lg: "40%" },
           transition:
             "transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease",
-          color: "#2D336B",
+          color: "#03346E",
           "& svg": {
-            color: "#2D336B",
+            color: "#03346E",
             transition: "color 0.3s ease",
           },
           "&:hover": {
             transform: "scale(1.02)",
             boxShadow: 10,
-            bgcolor: "#2D336B",
+            bgcolor: "#03346E",
             color: "white",
             "& svg": {
               color: "white",
@@ -198,10 +198,10 @@ const Education = () => {
             maxWidth: 120,
             mx: { xs: "auto", sm:'auto', md:'auto', lg: 0 },
             ml: { lg: "auto" },  
-            color: "#7886C7",
+            color: "#03346E",
             fontWeight: "600",
             textAlign: "center",
-            border: "2px solid #7886C7",
+            border: "2px solid #03346E",
           }}
         >
           <Typography>GPA: 4.0 / {gpa}</Typography>

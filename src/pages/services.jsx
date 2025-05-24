@@ -3,17 +3,18 @@ import { Box, Typography, Grid, Paper } from '@mui/material';
 import BuildIcon from '@mui/icons-material/Build';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import CodeIcon from '@mui/icons-material/Code';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+
 
 const servicesData = [
   {
     icon: <BuildIcon sx={{ fontSize: 70, color: '#90caf9' }} />,
-    title: 'Web Geliştirme',
-    desc: 'Modern ve duyarlı web uygulamaları geliştiriyorum.',
+    title: 'E-Öğrenme İçeriği   ',
+    desc: 'Etkili e-öğrenme deneyimleri oluşturmak için Articulate Rise 360'    + 
+    ' ve Storyline 360 ile içerikler hazırlar, bu içerikleri LMS platformlarına entegre ederim.',
   },
   {
     icon: <DesignServicesIcon sx={{ fontSize: 70, color: '#90caf9' }} />,
-    title: 'UI/UX Tasarım',
+    title: 'Video Editleme',
     desc: 'Kullanıcı dostu ve şık tasarımlar oluşturuyorum.',
   },
   {
@@ -21,11 +22,7 @@ const servicesData = [
     title: 'Yazılım Danışmanlığı',
     desc: 'Proje ihtiyaçlarınıza özel çözümler sunuyorum.',
   },
-  {
-    icon: <SupportAgentIcon sx={{ fontSize: 70, color: '#90caf9' }} />,
-    title: 'Teknik Destek',
-    desc: 'Sorunlarınızı hızlı ve etkili şekilde çözüyorum.',
-  },
+ 
 ];
 
 const Services = () => {
@@ -36,14 +33,14 @@ const Services = () => {
         fontWeight="bold"
         gutterBottom
         align="center"
-        sx={{ mb: 3 }}
+        sx={{ mb: 3, color:'white'}}
       >
         Hizmetler
       </Typography>
       <Typography
         variant="body1"
         align="center"
-        color="text.secondary"
+        color="white"
         mb={6}
         maxWidth={700}
         mx="auto"
@@ -67,8 +64,8 @@ const Services = () => {
             <Paper
               elevation={0}
               sx={{
-                border: '2px solid #90caf9',
-                bgcolor: 'transparent',
+                border: '2px solid #E2E2B6',
+                background:'linear-gradient(100deg,rgb(28, 91, 167),rgb(5, 36, 73) )',
                 p: 10,
                 borderRadius: 3,
                 display: 'flex',
@@ -97,10 +94,12 @@ const Services = () => {
             >
               {icon}
               <Box>
-                <Typography variant="h5" fontWeight="bold" gutterBottom>
+                <Typography variant="h5" fontWeight="bold" gutterBottom sx={{
+                  color:'white',
+                }}>
                   {title}
                 </Typography>
-                <Typography variant="body1" color="text.secondary">
+                <Typography variant="body1" color="white">
                   {desc}
                 </Typography>
               </Box>

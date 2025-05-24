@@ -12,10 +12,11 @@ const Contact = () => {
     link.download = 'cv.pdf';
     link.click();
   };
+  
 
   const neonIconStyle = {
     color: '#dcdcff',
-    filter: 'drop-shadow(0 0 6px rgb(53, 177, 226)) drop-shadow(0 0 10px rgb(16, 203, 216))',
+    filter: 'drop-shadow(0 0 1px #E2E2B6) drop-shadow(0 0 10px #E2E2B6)',
     transition: 'filter 0.3s ease',
     '&:hover': {
       filter: 'drop-shadow(0 0 12px rgb(24, 123, 168)) drop-shadow(0 0 20px rgb(26, 133, 196))',
@@ -23,6 +24,8 @@ const Contact = () => {
     },
   };
 
+
+  
   return (
     <Box
       id="contact"
@@ -31,7 +34,7 @@ const Contact = () => {
         py: 6,
         px: 2,
         bgcolor: 'transparent',
-        color: 'black',
+        color: 'white',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
@@ -45,7 +48,7 @@ const Contact = () => {
         fontSize: { xs: 24, sm: 32, md: 36, lg: 40, xl: 48 },
 
           }}>
-        Contact
+        İletişim
       </Typography>
 
       <Box
@@ -100,18 +103,22 @@ const Contact = () => {
           textTransform: 'none',
           borderRadius: 3,
           backgroundColor: 'white',
-          color:'#7886C7',
-          border:'2px solid #7886C7',
+          color:'#03346E',
+          border:'2px solid #03346E',
           boxShadow: 'none',
           '&:hover': {
-            backgroundColor: '#7886C7',
+            backgroundColor: '#03346E',
             color:'white',
+            border:'2px solid #E2E2B6',
             boxShadow: 'none',
           },
         }}
       >
         Cv İndirmek İçin
       </Button>
+
+      
+
     </Box>
   );
 };

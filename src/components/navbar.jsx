@@ -70,7 +70,7 @@ const Navbar = () => {
                 sx={{
                   cursor: 'pointer',
                   userSelect: 'none',
-                  color: elevated ? 'black ' : 'black',
+                  color: elevated ? 'black ' : 'white',
                   transition: 'color 0.3s ease',
                 }}
               >
@@ -93,7 +93,7 @@ const Navbar = () => {
               onClick={() => setDrawerOpen(true)}
               sx={{
                 backgroundColor: 'transparent !important',
-                color: elevated ? 'black' : 'black',
+                color: elevated ? 'white' : 'white',
                 transition: 'color 0.3s ease',
                 p: 1,
               }}

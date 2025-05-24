@@ -43,7 +43,7 @@ const Project = () => {
         sx={{
           fontFamily: '"Segoe UI", sans-serif',
           fontWeight: 'bold',
-          color: '#536878',
+          color: 'white',
           mb: 6,
           textAlign: 'center',
           fontSize: { xs: 16, sm: 18, md:20, lg:24, xl:44 },
@@ -62,7 +62,7 @@ const Project = () => {
         }}
       >
         <IconButton onClick={handlePrev}>
-          <ChevronLeftIcon sx={{ fontSize: 48, color: '#536878' }} />
+          <ChevronLeftIcon sx={{ fontSize: 48, color: '#E2E2B6' }} />
         </IconButton>
 
         <Paper
@@ -72,7 +72,7 @@ const Project = () => {
                 maxWidth: { xs: '90%', sm: '95%', md: 800 },
                 p: { xs: 3, md: 5 },
                 borderRadius: 4,
-                backgroundColor: '#536878',
+                background:'linear-gradient(100deg, #4583cf, #03346E )',
                 color: '#EAE0C8',
                 transition: 'all 0.5s ease',
                 minHeight: 300,
@@ -120,7 +120,7 @@ const Project = () => {
         </Paper>
 
         <IconButton onClick={handleNext}>
-          <ChevronRightIcon sx={{ fontSize: 48, color: '#536878' }} />
+          <ChevronRightIcon sx={{ fontSize: 48, color: '#E2E2B6' }} />
         </IconButton>
       </Box>
     </Box>

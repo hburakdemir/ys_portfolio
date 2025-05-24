@@ -22,7 +22,9 @@ import Services from './pages/services';
 function App() {
   return (
     <Router>
-      <Box sx={{ bgcolor: '#FFF', minHeight: '100vh' }}>
+      <Box sx={{ 
+          background: 'linear-gradient(100deg, #021526, #4d8a9c)',
+         minHeight: '100vh' }}>
         <Navbar />
         <ScrollSpy sectionIds={['about', 'education', 'experience', 'projects', 'skills', 'contact']} />
 
