@@ -1,29 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Box,
-  Typography,
-  Avatar,
-  IconButton,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  CircularProgress,
-  Tooltip
-} from '@mui/material';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-
+import React from 'react';
+import { Box, Typography, Avatar, IconButton, Tooltip} from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import aboutData from '../data/about';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
-
 
 
 
@@ -37,138 +21,11 @@ const neonIconStyle = {
   },
 };
 
+
+
 const About = () => {
-
-
-
-  const [aboutData, setAboutData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // Admin kontrolü: sessionStorage'dan kontrol
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  
-
-  // Düzenleme modalı
-  const [editOpen, setEditOpen] = useState(false);
-  const [currentEdit, setCurrentEdit] = useState({ id: null, text: '' });
-  const [editLoading, setEditLoading] = useState(false);
-
-  // Silme modalı
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [currentDelete, setCurrentDelete] = useState({ id: null, text: '' });
-  const [confirmDelete, setConfirmDelete] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false);
-
-useEffect(() => {
-  const token = sessionStorage.getItem('token');
-  let admin = false;
-  if (token) {
-    try {
-      const decoded = jwtDecode(token);
-      admin = decoded.isAdmin === true;
-    } catch (error) {
-      console.error('Token decode error:', error);
-    }
-  }
-
-  console.log('Token:', token);
-  console.log('isAdmin (decoded):', admin);
-
-  setIsAdmin(admin);
-  fetchAboutData();
-}, []);
-
-  // getText için token yok
-  const fetchAboutData = () => {
-    setLoading(true);
-    axios
-      .get('http://localhost:3003/about/getText') // token yok
-      .then((response) => {
-        setAboutData(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Veri getirilemedi', error);
-        setLoading(false);
-      });
-  };
-
-  // Düzenleme aç
-  const handleEditOpen = (item) => {
-    setCurrentEdit(item);
-    setEditOpen(true);
-  };
-
-  // Düzenleme kapat
-  const handleEditClose = () => {
-    setEditOpen(false);
-    setCurrentEdit({ id: null, text: '' });
-  };
-
-
-
-  // Düzenleme kaydet (token ile)
-  const handleEditSave = () => {
-    setEditLoading(true);
-    const token = sessionStorage.getItem('token') || '';
-    axios
-      .put(
-        `http://localhost:3003/about/updateText/${currentEdit.id}`,
-        { text: currentEdit.text },
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then(() => {
-        // Güncellenen metni state içinde güncelle
-        setAboutData((prev) =>
-          prev.map((item) =>
-            item.id === currentEdit.id ? { ...item, text: currentEdit.text } : item
-          )
-        );
-        setEditLoading(false);
-        handleEditClose();
-      })
-      .catch(() => {
-        alert('Yetkisiz veya hata oluştu');
-        setEditLoading(false);
-      });
-  };
-
-  // Silme aç
-  const handleDeleteOpen = (item) => {
-    setCurrentDelete(item);
-    setConfirmDelete(false);
-    setDeleteOpen(true);
-  };
-
-  // Silme kapat
-  const handleDeleteClose = () => {
-    setDeleteOpen(false);
-    setCurrentDelete({ id: null, text: '' });
-    setConfirmDelete(false);
-  };
-
-  // Silme onayla ve işle (token ile)
-  const handleDeleteConfirm = () => {
-    setDeleteLoading(true);
-    const token = sessionStorage.getItem('token') || '';
-    axios
-      .delete(`http://localhost:3003/about/deleteText/${currentDelete.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then(() => {
-        setAboutData((prev) => prev.filter((item) => item.id !== currentDelete.id));
-        setDeleteLoading(false);
-        handleDeleteClose();
-      })
-      .catch(() => {
-        alert('Silme işlemi başarısız.');
-        setDeleteLoading(false);
-      });
-  };
-
   return (
-    <Box
+     <Box
       id="about"
       sx={{
         minHeight: '100vh',
@@ -254,81 +111,51 @@ useEffect(() => {
 
         {/* Sağ Kısım */}
         <Box
-          sx={{
-            width: { xs: '90%', md: '70%' },
-            bgcolor: '#FFF',
-            p: { xs: 2, sm: 3, md: 4 },
-            marginRight: { xs: 50, sm: 5, md: 5 },
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: { md: 4 },
-            zIndex: 1,
-            maxWidth: '100%',
-          }}
-        >
-          <Typography
-            variant="h4"
-            sx={{
-              color: '#001f4d',
-              fontWeight: '790',
-              mb: 3,
-              textAlign: 'center',
-              wordBreak: 'break-word',
-            }}
-          >
-            Hakkımda
-          </Typography>
-
-          {loading ? (
-            <CircularProgress />
-          ) : aboutData.length === 0 ? (
-            <Typography variant="body1" sx={{ color: '#333', textAlign: 'center' }}>
-              Henüz bir içerik yok.
-            </Typography>
-          ) : (
-            aboutData.map((item) => (
-              <Box key={item.id} sx={{ mb: 2, display: 'flex', alignItems: 'center', position: 'relative' }}>
-  <Typography
-    variant="body1"
+                  sx={{
+                    width: { xs: '90%', md: '70%' },
+                    bgcolor: 'white',
+                    p: { xs: 2, sm: 3, md: 4 },
+                    marginRight: {xs:50, sm:5, md:5},
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems:'center',
+                    borderRadius: { md: 4 },
+                    zIndex: 1,
+                    maxWidth: '100%',
+                  }}
+                >
+           <Typography
+    variant="h4"
     sx={{
-      color: '#333',
-      wordBreak: 'break-word',
-      whiteSpace: 'pre-wrap',
-      flex: 1,
+      color: '#001f4d',
+      fontWeight: 'bold',
+      mb: 3,
       textAlign: 'center',
-      fontSize:'17px'
+      wordBreak: 'break-word',
     }}
   >
-    • {item.text}
+    Hakkımda
   </Typography>
-
-  {isAdmin && (
-    <Box sx={{ ml: 2, display: 'flex', gap: 1 }}>
-      <Button size="small" variant="outlined" onClick={() => handleEditOpen(item)}>
-        Düzenle
-      </Button>
-      <Button
-        size="small"
-        variant="outlined"
-        color="error"
-        onClick={() => handleDeleteOpen(item)}
-      >
-        Sil
-      </Button>
-    </Box>
-  )}
-</Box>
-
-            ))
-          )}
+          {aboutData.map((item, index) => (
+            <Typography
+      key={index}
+      variant="body1"
+      sx={{
+        color: '#333',
+        mb: 2,
+        textAlign:'center',
+        wordBreak: 'break-word',
+        maxWidth: '100%',
+        px: 1
+      }}
+    >
+      • {item}
+    </Typography>
+          ))}
 
           <Box sx={{ display: 'flex', alignItems: 'center', mt: 2, flexWrap: 'wrap' }}>
-            <MailOutlineIcon
-             sx={{
-               mr: 1,
-               color:'#03346E' }} />
+            <MailOutlineIcon sx={{  mr: 1 }} />
             <Box
               onClick={() => window.open('mailto:yakupsimseke@gmail.com')}
               sx={{
@@ -340,94 +167,38 @@ useEffect(() => {
                 bgcolor: 'white',
                 borderRadius: 20,
                 cursor: 'pointer',
-                border: '2px solid #03346E',
+                border: '2px solid rgb(11, 151, 194)',
                 color: 'black',
                 transition: '0.3s',
                 '&:hover': {
-                  bgcolor: '#03346E',
+                  bgcolor: 'rgb(11, 151, 194)',
                   color: 'white',
-                  border: '2px solid #ffffff',
+                  border: '2px solid rgb(255, 255, 255)',
                 },
                 '&:hover svg': {
-                  color: 'white',
+              color: 'white',
                 },
                 mt: { xs: 1, md: 0 },
               }}
             >
-              <Typography variant="body1" sx={{ fontWeight: '20px' }}>
+              <Typography
+               variant="body1"
+               sx={{
+                 fontWeight: '20px'
+                  }}>
                 Benimle İletişime Geçin
               </Typography>
               <ArrowForwardIosIcon
-                sx={{
-                  color: '#03346E',
-                  fontSize: 16,
-                  transition: '0.3s',
-                }}
-              />
+               sx={{
+                color: 'rgb(11, 151, 194)',
+                 fontSize: 16,
+                 transition: '0.3s',
+                
+                 }} />
             </Box>
           </Box>
         </Box>
       </Box>
-
-      {/* Düzenleme Dialog */}
-      <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth>
-        <DialogTitle>Metni Düzenle</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Metin"
-            type="text"
-            fullWidth
-            multiline
-            minRows={3}
-            value={currentEdit.text}
-            onChange={(e) =>
-              setCurrentEdit((prev) => ({
-                ...prev,
-                text: e.target.value,
-              }))
-            }
-            sx={{ whiteSpace: 'pre-wrap' }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleEditClose} disabled={editLoading}>
-            İptal
-          </Button>
-          <Button onClick={handleEditSave} disabled={editLoading} variant="contained">
-            {editLoading ? 'Kaydediliyor...' : 'Kaydet'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Silme Dialog */}
-      <Dialog open={deleteOpen} onClose={handleDeleteClose} maxWidth="xs" fullWidth>
-        <DialogTitle>Silme Onayı</DialogTitle>
-        <DialogContent>
-          <Typography sx={{ mb: 2 }}>Bu maddeyi silmek istediğinize emin misiniz?</Typography>
-          <Typography sx={{ fontStyle: 'italic', mb: 1 }}>"• {currentDelete.text}"</Typography>
-          <FormControlLabel
-            control={
-              <Checkbox checked={confirmDelete} onChange={(e) => setConfirmDelete(e.target.checked)} />
-            }
-            label="Silme işlemini onaylıyorum"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDeleteClose} disabled={deleteLoading}>
-            İptal
-          </Button>
-          <Button
-            onClick={handleDeleteConfirm}
-            disabled={!confirmDelete || deleteLoading}
-            variant="contained"
-            color="error"
-          >
-            {deleteLoading ? 'Siliniyor...' : 'Sil'}
-          </Button>
-        </DialogActions>
-      </Dialog>
     </Box>
   );
 };
